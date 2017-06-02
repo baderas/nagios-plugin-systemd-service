@@ -1,6 +1,7 @@
 # nagios-plugin-systemd-timer
 
 Nagios plugin to check the status of a systemd service that is regularly started by a montonic timer.
+
 E.g. check if a job is started every 2 hours and exited sucessfully.
 
 ## Authors
