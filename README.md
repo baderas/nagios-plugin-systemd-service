@@ -6,6 +6,7 @@ E.g. check if a job is started every 2 hours and exited sucessfully.
 ## Authors
 
 Mohamed El Morabity <melmorabity -(at)- fedoraproject.org> (nagios-plugin-systemd-service)
+
 Andreas Bader <development -(at)- geekparadise.de> (nagios-plugin-systemd-timer)
 
 ## Usage
