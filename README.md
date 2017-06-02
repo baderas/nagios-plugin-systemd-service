@@ -12,7 +12,7 @@ Andreas Bader <development -(at)- geekparadise.de> (nagios-plugin-systemd-timer)
 
 ## Usage
 
-    check_systemd_timer.sh <service name> <time in seconds between runs that is not warning> <time in seconds between runs thar is not critical>
+    check_systemd_timer.sh <service name> <timer name> <time in seconds between runs that is not warning> <time in seconds between runs thar is not critical>
 
 ## Examples
 
