@@ -16,12 +16,20 @@ Andreas Bader <development -(at)- geekparadise.de> (nagios-plugin-systemd-timer)
 
 ## Examples
 
-    $ ./check_systemd_timer.sh sshd
-    OK: service sshd is running
+    $ ./check_systemd_timer.sh <some service> <some timer> 3200 7200
+    OK: service <some service>.service was running 1250 seconds ago.
 
-    $ sudo systemctl stop sshd
-    $ ./check_systemd_service.sh sshd
-    ERROR: service sshd is not running
+     $ ./check_systemd_service.sh <some bad service> <some timer> 3200 7200
+    ERROR: service <some service>.service was executed 900 seconds ago and exited with status error."
 
-    $ ./check_systemd_service.sh foo
-    ERROR: service foo doesn't exist
+     $ ./check_systemd_service.sh <some service> <some bad timer> 3200 7200
+    WARNING: service <some service>.service was executed 3300 seconds ago."
+
+    $ ./check_systemd_service.sh <some service> <some bad timer> 3200 7200
+    ERROR: service <some service>.service was executed 7300 seconds ago."
+
+    $ ./check_systemd_service.sh <not existing service> <some timer> 3200 7200
+    ERROR: service <not existing service>.service doesn't exist
+    
+    $ ./check_systemd_service.sh <some service> <not existing timer> 3200 7200
+    ERROR: timer <not existing timer>.timer doesn't exist
