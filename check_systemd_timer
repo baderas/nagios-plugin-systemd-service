@@ -69,7 +69,8 @@ else
     # if not running, we check if it was succesful
     state_msg=$(systemctl show -p Result ${service}.service | sed "s/Result=//g")
     state=$(echo $state_msg | grep "success" | wc -l)
-    if [ $state -ne 1 ]; then
+    stateError=$(echo $state_msg | grep "failed" | wc -l)
+    if [ $state -ne 1 -o $stateError -ne 0 ]; then
         echo "ERROR: service ${service}.service was executed $diff seconds ago and exited with status $state_msg."
         exit $STATE_ERROR
     fi
