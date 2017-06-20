@@ -54,21 +54,26 @@ elif [ $diff -gt $warning ]; then
     exit $STATE_WARNING
 fi
 
-systemctl --quiet is-active ${service}.service
+systemctl --quiet is-active ${timer}.timer
 if [ $? -ne 0 ]; then
-    # if is running at the moment it is okay, if not, we check if it was succesful
+    echo "ERROR: timer ${timer}.timer is not running"
+    exit $STATE_CRITICAL
+fi
+
+systemctl --quiet is-active ${service}.service
+if [ $? -eq 0 ]; then
+    # if is running at the moment it is okay
+    echo "OK: service ${service}.service was started $diff seconds ago and is running."
+    exit $STATE_OK
+else
+    # if not running, we check if it was succesful
     state_msg=$(systemctl show -p Result ${service}.service | sed "s/Result=//g")
     state=$(echo $state_msg | grep "success" | wc -l)
     if [ $state -ne 1 ]; then
         echo "ERROR: service ${service}.service was executed $diff seconds ago and exited with status $state_msg."
         exit $STATE_ERROR
     fi
-fi
 
-systemctl --quiet is-active ${timer}.timer
-if [ $? -ne 0 ]; then
-    echo "ERROR: timer ${timer}.timer is not running"
-    exit $STATE_CRITICAL
 fi
 
 echo "OK: service ${service}.service was running $diff seconds ago."
