@@ -48,7 +48,7 @@ diff=$(( $now_date-$last_execution_date ))
 
 if [ $diff -gt $critical ]; then
     echo "ERROR: service ${service}.service was executed $diff seconds ago."
-    exit $STATE_ERROR
+    exit $STATE_CRITICAL
 elif [ $diff -gt $warning ]; then
     echo "WARNING: service ${service}.service was executed $diff seconds ago."
     exit $STATE_WARNING
@@ -72,7 +72,7 @@ else
     stateError=$(echo $state_msg | grep "failed" | wc -l)
     if [ $state -ne 1 -o $stateError -ne 0 ]; then
         echo "ERROR: service ${service}.service was executed $diff seconds ago and exited with status $state_msg."
-        exit $STATE_ERROR
+        exit $STATE_CRITICAL
     fi
 
 fi
