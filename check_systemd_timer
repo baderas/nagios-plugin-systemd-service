@@ -21,7 +21,7 @@ PLUGINDIR=$(dirname $0)
 
 
 if [ $# -ne 4 ]; then
-    echo "Usage: ${0##*/} <service name> <timer name> <time in seconds between runs that is not warning> <time in seconds between runs thar is not critical>" >&2
+    echo "Usage: ${0##*/} <service name> <timer name> <time in seconds between runs that is not warning> <time in seconds between runs that is not critical>" >&2
     exit $STATE_UNKNOWN
 fi
 
